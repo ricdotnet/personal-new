@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// === === === transitions === === === //
+.slow {
+  @apply ease-in-out duration-500;
+}
+.medium {
+  @apply ease-in-out duration-200;
+}
+.fast {
+  @apply ease-in-out duration-100;
+}
