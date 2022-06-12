@@ -8,9 +8,9 @@
       </div>
     </div>
     <div>
-      <template v-if="!state.loading">
+      <template v-if="!githubState.loading">
         <div class="w-[250px] h-[250px]">
-          <img class="user-info__pfp" :src="state.data.avatar_url" alt="Ricardo Rocha"/>
+          <img class="user-info__pfp" :src="githubState.data.avatar_url" alt="Ricardo Rocha"/>
         </div>
       </template>
       <template v-else>
@@ -18,14 +18,31 @@
       </template>
     </div>
   </div>
+
+  <div class="spotify-info">
+    <template v-if="spotifyState.loading">
+      loading my spotify listening status....
+    </template>
+    <template v-else>
+      {{ spotifyState.data.item.name }}
+      <ProgressBar :name="spotifyState.data.item.name"
+                   :duration="spotifyState.data.item.duration_ms"
+                   :progress="spotifyState.data.progress_ms"/>
+    </template>
+  </div>
 </template>
 
 <script setup lang="ts">
-  import { useGithubAvatar } from '@hooks';
+  import { reactive } from 'vue';
+  import { useGithubAvatar, useSpotify } from '@hooks';
+  import { ProgressBar } from '@components';
 
-  const [state] = useGithubAvatar();
+  const [githubState] = useGithubAvatar();
+  const [spotifyState] = useSpotify();
 
-  defineExpose({ state });
+  const state = reactive<any>({});
+
+  defineExpose({ state, githubState, spotifyState });
 </script>
 
 <style scoped lang="scss">
@@ -47,6 +64,9 @@
     &__pfp-skeleton {
       @apply w-[250px] h-[250px] rounded-full aspect-auto bg-gray-200 animate-pulse;
     }
+  }
 
+  .spotify-info {
+    @apply w-full flex flex-col justify-between mt-20;
   }
 </style>

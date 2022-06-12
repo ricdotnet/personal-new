@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 // === === === transitions === === === //
+.super-slow {
+  @apply ease-in-out duration-1000;
+}
 .slow {
   @apply ease-in-out duration-500;
 }
