@@ -8,7 +8,7 @@ const useSpotify = () => {
   });
 
   async function fetchSpotifyStatus() {
-    const response = await axios.get('http://localhost:4000/v1/spotify');
+    const response = await axios.get(`${import.meta.env.VITE_API}/spotify`);
     state.data = response.data;
     state.loading = false;
 

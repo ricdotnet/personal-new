@@ -13,7 +13,7 @@ const useGithubAvatar = () => {
   });
 
   async function fetchUserDetails() {
-    const response = await axios.get('http://localhost:4000/v1/github');
+    const response = await axios.get(`${import.meta.env.VITE_API}/github`);
     state.data = {
       login: response.data.login,
       avatar_url: response.data.avatar_url,
