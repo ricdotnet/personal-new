@@ -1,7 +1,7 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 
-interface User {
+type User = {
   login: string;
   avatar_url: string;
 }

@@ -23,6 +23,9 @@
     <template v-if="spotifyState.loading">
       loading my spotify listening status....
     </template>
+    <template v-else-if="!spotifyState.data.item">
+      not listening to anything currently....
+    </template>
     <template v-else>
       {{ spotifyState.data.item.name }}
       <ProgressBar :name="spotifyState.data.item.name"

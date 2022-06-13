@@ -19,7 +19,9 @@ const useSpotify = () => {
       refetchTimer = setTimeout(fetchSpotifyStatus, calculateNextSong(state.data));
     }
 
-    refetchStatus();
+    if (state.data && state.data.item) {
+      refetchStatus();
+    }
     return state.data;
   }
 
