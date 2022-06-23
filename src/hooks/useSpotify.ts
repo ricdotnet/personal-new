@@ -20,7 +20,7 @@ const useSpotify = () => {
     }
 
     if (state.data && state.data.item) {
-      refetchStatus();
+      // refetchStatus();
     }
     return state.data;
   }
