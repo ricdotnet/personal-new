@@ -23,11 +23,11 @@
   @import "src/assets/_defaults";
 
   .nav-item {
-    @apply text-xl font-medium cursor-pointer text-$primary;
+    @apply text-xl font-medium cursor-pointer text-$primary dark:text-white;
     @extend .fast;
 
     &__active {
-      @apply text-$accent;
+      @apply text-$accent dark:text-$accent;
     }
 
     &:hover {

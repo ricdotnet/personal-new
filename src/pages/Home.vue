@@ -10,7 +10,7 @@
     <div>
       <template v-if="!githubState.loading">
         <div class="w-[250px] h-[250px]">
-          <img class="user-info__pfp" :src="githubState.data.avatar_url" alt="Ricardo Rocha" />
+          <img class="user-info__pfp" :src="githubState.data.avatar_url" alt="Ricardo Rocha"/>
         </div>
       </template>
       <template v-else>
@@ -36,49 +36,50 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { useGithubAvatar, useSpotify } from '@hooks';
-import { ProgressBar } from '@components';
+  import { reactive } from 'vue';
+  import { useGithubAvatar, useSpotify } from '@hooks';
 
-const [githubState] = useGithubAvatar();
-const [spotifyState] = useSpotify();
+  const [githubState] = useGithubAvatar();
+  const [spotifyState] = useSpotify();
 
-const state = reactive<any>({
-  playing: '',
-});
+  const state = reactive<any>({
+    playing: '',
+  });
 
-const ws = new WebSocket('ws://localhost:4000');
-ws.onmessage = (e: any) => {
-  const payload = JSON.parse(e.data);
+  const ws = new WebSocket('ws://localhost:4000');
+  ws.onmessage = (e: any) => {
+    const payload = JSON.parse(e.data);
 
-  state.playing = payload.payloads[0].events[0].event.state.item.name;
-}
+    if ( payload.payloads ) {
+      state.playing = payload.payloads[0].events[0].event.state.item.name;
+    }
+  };
 
-defineExpose({ state, githubState, spotifyState });
+  defineExpose({ state, githubState, spotifyState });
 </script>
 
 <style scoped lang="scss">
-.user-info {
-  @apply w-full flex items-center justify-between mt-20;
+  .user-info {
+    @apply w-full flex items-center justify-between mt-20;
 
-  &__title {
-    @apply text-2xl text-$primary font-bold indent-10;
+    &__title {
+      @apply text-2xl font-bold indent-10;
+    }
+
+    &__content {
+      @apply text-2xl font-light;
+    }
+
+    &__pfp {
+      @apply rounded-full border-4 border-$primary dark:border-white;
+    }
+
+    &__pfp-skeleton {
+      @apply w-[250px] h-[250px] rounded-full aspect-auto bg-gray-200 animate-pulse;
+    }
   }
 
-  &__content {
-    @apply text-2xl text-$primary font-light;
+  .spotify-info {
+    @apply w-full flex flex-col justify-between mt-20;
   }
-
-  &__pfp {
-    @apply rounded-full border-4 border-$primary;
-  }
-
-  &__pfp-skeleton {
-    @apply w-[250px] h-[250px] rounded-full aspect-auto bg-gray-200 animate-pulse;
-  }
-}
-
-.spotify-info {
-  @apply w-full flex flex-col justify-between mt-20;
-}
 </style>

@@ -2,6 +2,7 @@
   <div class="navbar">
     <div class="navbar__name">Ricardo</div>
     <div class="navbar__right">
+      <ThemeToggle />
       <NavItem name="home" value="Home"/>
       <NavItem name="about" value="About"/>
       <NavItem name="projects" value="Projects"/>
@@ -11,7 +12,7 @@
 
 <script setup lang="ts">
   import { reactive } from 'vue';
-  import { NavItem } from '@components';
+  import { NavItem, ThemeToggle } from '@components';
 
   const state = reactive({});
 
@@ -24,7 +25,7 @@
     @apply w-full px-10 lg:px-0 lg:container-lg lg:mx-auto;
 
     &__name {
-      @apply font-bold text-$primary text-4xl;
+      @apply font-bold text-4xl;
     }
 
     &__right {

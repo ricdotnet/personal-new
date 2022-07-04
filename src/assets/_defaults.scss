@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+// === === === global styles === === === //
+.light {
+  @apply bg-white text-$primary medium;
+}
+.dark {
+  @apply bg-$primary text-white medium;
+}
+
 // === === === transitions === === === //
 .super-slow {
   @apply ease-in-out duration-1000;
